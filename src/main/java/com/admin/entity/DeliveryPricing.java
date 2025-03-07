@@ -1,21 +1,27 @@
 package com.admin.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import java.math.BigDecimal;
+import lombok.*;
 
 @Entity
-@Table(name = "DeliveryPricing")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "delivery_pricing")
 public class DeliveryPricing {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pricingId;
+    private Long id;
+
+    @Column(nullable = false)
+    private double distance;
+
+    @Column(nullable = false)
+    private double price;
 
     @ManyToOne
-    @JoinColumn(name = "companyId", nullable = false)
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
-
-    private BigDecimal distance;
-    private BigDecimal price;
 }

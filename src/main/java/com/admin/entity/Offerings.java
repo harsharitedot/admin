@@ -1,22 +1,28 @@
 package com.admin.entity;
+
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Table(name = "Offerings")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "company_offerings")
 public class Offerings {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long offeringsId;
 
-    @ManyToOne
-    @JoinColumn(name = "cuisineId", nullable = false)
-    private Cuisine cuisine;
+    @Column(nullable = false)
+    private String offeringsName;
 
     @ManyToOne
-    @JoinColumn(name = "companyId", nullable = false)
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    private String offeringsName;
+    @ManyToOne
+    @JoinColumn(name = "cuisine_id", nullable = false)
+    private Cuisine cuisine;
 }

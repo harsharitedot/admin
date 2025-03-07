@@ -1,26 +1,32 @@
 package com.admin.entity;
 
-
 import jakarta.persistence.*;
-import lombok.Data;
-import java.math.BigDecimal;
+import lombok.*;
 
 @Entity
-@Table(name = "ProductCatalog")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "product_catalogs")
 public class ProductCatalog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemId;
+    private Long categoryId;
+
+    @Column(nullable = false)
+    private String categoryName;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId", nullable = false)
-    private ProductCategory category;
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
 
-    private String itemName;
-    private String itemDescription;
-    private BigDecimal itemPrice;
-    private String itemImageUrl;
-    private String itemType;
-    private BigDecimal discountPercentage;
+    @ManyToOne
+    @JoinColumn(name = "cuisine_id", nullable = false)
+    private Cuisine cuisine;
+
+    @ManyToOne
+    @JoinColumn(name = "offerings_id", nullable = false)
+    private Offerings offerings;
 }

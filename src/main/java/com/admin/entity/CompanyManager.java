@@ -1,21 +1,30 @@
 package com.admin.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Table(name = "CompanyManager")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "company_managers")
 public class CompanyManager {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long managerId;
 
-    @ManyToOne
-    @JoinColumn(name = "companyId", nullable = false)
-    private Company company;
-
+    @Column(nullable = false)
     private String managerName;
+
+    @Column(nullable = false, unique = true)
     private String managerLoginId;
-    private String managerLoginPassword;
+
+    @Column(nullable = false)
+    private String managerLoginPassword;  // **Should be hashed in real implementation**
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
 }
